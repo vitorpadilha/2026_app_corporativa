@@ -1,0 +1,6 @@
+br\cefetrj\service\PessoaService.class
+br\cefetrj\dto\PessoaDTOInput.class
+br\cefetrj\dto\PessoaDTOOutput.class
+br\cefetrj\controller\PessoaServlet.class
+br\cefetrj\controller\PessoaController.class
+br\cefetrj\model\Pessoa.class
