@@ -53,12 +53,14 @@ public class PessoaServlet extends HttpServlet {
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // TODO Auto-generated method stub
+        String id = request.getParameter("id");
         String nome = request.getParameter("nome");
         String idade = request.getParameter("idade");
-        Pessoa p1 = new Pessoa(null, nome, Long.parseLong(idade));
         PessoaDAO dao = new PessoaDAO();
         try {
+            Pessoa p1 = dao.consultarPorId(Long.parseLong(id));
+            p1.setNome(nome);
+            p1.setIdade(Long.parseLong(idade));
             dao.atualizar(p1);
         } catch (Exception e) {
             System.out.println("Erro ao alterar pessoa: " + e.getMessage());
