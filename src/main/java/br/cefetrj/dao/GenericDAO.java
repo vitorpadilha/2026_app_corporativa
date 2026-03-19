@@ -1,5 +1,6 @@
 package br.cefetrj.dao;
 
+import java.sql.Connection;
 import java.util.List;
 
 import br.cefetrj.model.EntidadeGenerica;
