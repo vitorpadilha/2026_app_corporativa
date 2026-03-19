@@ -1,7 +1,6 @@
 package br.cefetrj.controller.pessoa;
 
 import java.io.IOException;
-import java.util.List;
 
 import br.cefetrj.dao.PessoaDAO;
 import br.cefetrj.model.Pessoa;
@@ -11,18 +10,20 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/lista_pessoas")
-public class ListaPessoaServlet extends HttpServlet {
+@WebServlet("/remover_pessoa")
+public class RemoverPessoaServlet extends HttpServlet {
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         PessoaDAO dao = new PessoaDAO();
+        String id = request.getParameter("id");
         try {
-            List<Pessoa> pessoas = dao.consultarTodos();
-            request.setAttribute("pessoas", pessoas);
+            Pessoa pessoa = dao.consultarPorId(Long.parseLong(id));
+            dao.excluir(pessoa);
         } catch (Exception e) {
-            System.out.println("Erro ao listar pessoas : " + e.getMessage());
+            System.out.println("Erro ao excluir pessoa: " + e.getMessage());
             throw new RuntimeException(e);
         }
-        request.getRequestDispatcher("/pessoa/lista.jsp").forward(request, response);
+        request.getRequestDispatcher("/pessoa/msg_deletar.jsp").forward(request, response);
     }
 }
