@@ -1,7 +1,11 @@
 package br.cefetrj.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
+import br.cefetrj.dao.utils.ConnectionFactory;
 import br.cefetrj.model.Pessoa;
 
 public class PessoaDAO implements GenericDAO<Pessoa> {
@@ -9,7 +13,15 @@ public class PessoaDAO implements GenericDAO<Pessoa> {
     @Override
     public void cadastrar(Pessoa obj) {
         String sql = "INSERT INTO pessoa (nome, idade) VALUES (?, ?)";
-
+        Connection conn = ConnectionFactory.getConnection();
+        PreparedStatement preparedStatement = conn.prepareStatement(sql);
+        try {
+            preparedStatement.setString(1, obj.getNome());
+            preparedStatement.setLong(2, obj.getIdade());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
