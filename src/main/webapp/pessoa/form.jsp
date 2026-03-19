@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<import br.cefetrj.model.Pessoa>
+<%@ page import="br.cefetrj.model.Pessoa" %>
     <%
         Pessoa pessoa = (Pessoa) request.getAttribute("pessoa");
     %>
