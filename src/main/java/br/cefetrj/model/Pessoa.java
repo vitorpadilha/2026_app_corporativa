@@ -19,4 +19,12 @@ public class Pessoa extends EntidadeGenerica {
         return idade;
     }
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setIdade(Long idade) {
+        this.idade = idade;
+    }
+
 }
