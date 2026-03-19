@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<import br.cefetrj.model.Pessoa>
+    <%
+        Pessoa pessoa = (Pessoa) request.getAttribute("pessoa");
+    %>
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
@@ -7,8 +11,9 @@
 </head>
 <body>
     <form action="/aula2/pessoa" method="post">
+        <input type="hidden" name="id" value="<%= pessoa.getId() %>">
         <label for="nome">Nome 2:</label>
-        <input type="text" id="nome" name="nome">
+        <input type="text" id="nome" name="nome" value="<%= pessoa.getNome() %>">
         <br>
         <label for="idade">Idade:</label>
         <input type="number" id="idade" name="idade">
