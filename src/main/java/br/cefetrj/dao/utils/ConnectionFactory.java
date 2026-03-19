@@ -6,16 +6,20 @@ import java.sql.SQLException;
 
 public class ConnectionFactory {
 
-    private String url = "jdbc:postgresql://localhost:5432/aluno";
-    private String user = "postgres";
-    private String password = "";
+    private static Connection instance;
 
-    public Connection getConnection() {
-        try {
-            Class.forName("org.postgresql.Driver");
-            return DriverManager.getConnection(url, user, password);
-        } catch (SQLException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
+    public static Connection getConnection() {
+        if (instance == null) {
+            String url = "jdbc:mysql://localhost:3307/app_corporativas";
+            String user = "root";
+            String password = "";
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                instance = DriverManager.getConnection(url, user, password);
+            } catch (SQLException | ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
         }
+        return instance;
     }
 }

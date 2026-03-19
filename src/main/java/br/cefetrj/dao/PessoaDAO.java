@@ -8,7 +8,8 @@ public class PessoaDAO implements GenericDAO<Pessoa> {
 
     @Override
     public void cadastrar(Pessoa obj) {
-        // Implementação para cadastrar uma pessoa
+        String sql = "INSERT INTO pessoa (nome, idade) VALUES (?, ?)";
+
     }
 
     @Override
