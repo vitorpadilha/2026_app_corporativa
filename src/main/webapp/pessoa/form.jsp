@@ -2,6 +2,10 @@
 <%@ page import="br.cefetrj.model.Pessoa" %>
     <%
         Pessoa pessoa = (Pessoa) request.getAttribute("pessoa");
+         if (pessoa == null) {
+             pessoa = new Pessoa(null, "", null); 
+        }
+    }
     %>
 <html lang="pt">
 <head>
