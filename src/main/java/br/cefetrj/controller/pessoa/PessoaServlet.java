@@ -36,20 +36,6 @@ public class PessoaServlet extends HttpServlet {
         request.getRequestDispatcher("/pessoa/mostraDados.jsp").forward(request, response);
     }
 
-    protected void doDelete(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        PessoaDAO dao = new PessoaDAO();
-        String id = request.getParameter("id");
-        try {
-            Pessoa pessoa = dao.consultarPorId(Long.parseLong(id));
-            dao.excluir(pessoa);
-        } catch (Exception e) {
-            System.out.println("Erro ao excluir pessoa: " + e.getMessage());
-            throw new RuntimeException(e);
-        }
-        request.getRequestDispatcher("/pessoa/msg_deletar.jsp").forward(request, response);
-    }
-
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
