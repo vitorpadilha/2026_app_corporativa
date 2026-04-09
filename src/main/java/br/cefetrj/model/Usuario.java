@@ -22,11 +22,14 @@ public class Usuario extends GenericEntity {
 
     }
 
-    public Usuario(Long id, String email, String senha, boolean ativo) {
+    public Usuario(Long id, String email, String senha, boolean ativo, List<PerfilUsuario> perfis,
+            Departamento departamento) {
         super(id);
         this.email = email;
         this.senha = senha;
         this.ativo = ativo;
+        this.perfis = perfis;
+        this.departamento = departamento;
     }
 
     public List<PerfilUsuario> getPerfis() {

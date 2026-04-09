@@ -40,7 +40,7 @@ public class GenericDAO<T extends GenericEntity> {
         entityManager.getTransaction().commit();
     }
 
-    public T buscarPorId(int id) {
+    public T buscarPorId(Long id) {
         try (EntityManager entityManager = HibernateUtils.getEntityManager()) {
             Class<T> entityClass = (Class<T>) ((ParameterizedType) this.getClass().getGenericSuperclass())
                     .getActualTypeArguments()[0];
