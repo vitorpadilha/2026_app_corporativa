@@ -3,11 +3,11 @@ package br.cefetrj.dao;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
-import br.cefetrj.model.Usuario;
+import br.cefetrj.model.GenericEntity;
 import br.cefetrj.utils.HibernateUtils;
 import jakarta.persistence.EntityManager;
 
-public class GenericDAO<T> {
+public class GenericDAO<T extends GenericEntity> {
     public void salvar(T entidade) {
         EntityManager entityManager = HibernateUtils.getEntityManager();
         try {

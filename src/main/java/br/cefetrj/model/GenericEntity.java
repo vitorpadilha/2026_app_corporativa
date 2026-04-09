@@ -11,6 +11,10 @@ public class GenericEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    public GenericEntity() {
+
+    }
+
     public GenericEntity(Long id) {
         this.id = id;
     }

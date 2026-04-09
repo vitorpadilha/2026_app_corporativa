@@ -8,27 +8,26 @@ import jakarta.persistence.*;
 @Table(name = "usuarios")
 public class Usuario extends GenericEntity {
 
+    private String email;
+    private String senha;
+    private boolean ativo;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "usuario_perfil", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "perfil_id"))
+    private List<PerfilUsuario> perfis;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Departamento departamento;
+
+    public Usuario() {
+
+    }
+
     public Usuario(Long id, String email, String senha, boolean ativo) {
         super(id);
         this.email = email;
         this.senha = senha;
         this.ativo = ativo;
     }
-
-    private String email;
-    private String senha;
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    private boolean ativo;
-    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
-    private List<PerfilUsuario> perfis;
 
     public List<PerfilUsuario> getPerfis() {
         return perfis;
@@ -46,12 +45,28 @@ public class Usuario extends GenericEntity {
         this.email = email;
     }
 
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
     public boolean isAtivo() {
         return ativo;
     }
 
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
+    }
+
+    public Departamento getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(Departamento departamento) {
+        this.departamento = departamento;
     }
 
 }

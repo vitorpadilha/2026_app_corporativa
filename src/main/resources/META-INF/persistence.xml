@@ -7,14 +7,16 @@
     <persistence-unit name="meuPU" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <class>br.cefetrj.model.Entidade</class>
+        <class>br.cefetrj.model.Usuario</class>
+        <class>br.cefetrj.model.PerfilUsuario</class>
+        <class>br.cefetrj.model.Departamento</class>
         <!-- adicione suas outras entidades -->
 
         <properties>
             <!-- Conexão -->
             <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
             <property name="jakarta.persistence.jdbc.url"
-                value="jdbc:mysql://localhost:3307/aula202502?useSSL=false&amp;serverTimezone=UTC" />
+                value="jdbc:mysql://localhost:3307/aula202601?useSSL=false&amp;serverTimezone=UTC" />
             <property name="jakarta.persistence.jdbc.user" value="root" />
             <property name="jakarta.persistence.jdbc.password" value="" />
 
