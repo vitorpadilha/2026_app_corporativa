@@ -1,8 +1,8 @@
 <%@ page import="java.util.List" %>
-<%@ page import="br.cefetrj.model.Pessoa" %>
+<%@ page import="br.cefetrj.model.Usuario" %>
 
 <%
-    List<Pessoa> pessoas = (List<Pessoa>) request.getAttribute("pessoas");
+    List<Usuario> usuarios = (List<Usuario>) request.getAttribute("usuarios");
 %>
 
 <!DOCTYPE html>
@@ -15,28 +15,28 @@
 
 <h2>Lista de Pessoas</h2>
 
-<a href="/aula2/pessoa/form.jsp">Nova Pessoa</a>
+<a href="/app-coorporativa/usuario/form.jsp">Novo    Usuário</a>
 
 <br><br>
 
 <table border="1">
     <tr>
-        <th>Nome</th>
-        <th>Idade</th>
+        <th>Email</th>
+        <th>Senha</th>
         <th>Ações</th>
     </tr>
 
     <%
-        if (pessoas != null && !pessoas.isEmpty()) {
-            for (Pessoa p : pessoas) {
+        if (usuarios != null && !usuarios.isEmpty()) {
+            for (Usuario u : usuarios) {
     %>
     <tr>
-        <td><%= p.getNome() %></td>
-        <td><%= p.getIdade() %></td>
+        <td><%= u.getEmail() %></td>
+        <td><%= u.getSenha() %></td>
         <td>
-            <a href="/aula2/carrega_pessoa?id=<%= p.getId() %>">Editar</a>
+            <a href="/aula2/carrega_pessoa?id=<%= u.getId() %>">Editar</a>
             |
-            <a href="/aula2/remover_pessoa?id=<%= p.getId() %>" onclick="return confirm('Deseja remover?');">Remover</a>
+            <a href="/aula2/remover_pessoa?id=<%= u.getId() %>" onclick="return confirm('Deseja remover?');">Remover</a>
         </td>
     </tr>
     <%
@@ -44,7 +44,7 @@
         } else {
     %>
     <tr>
-        <td colspan="3">Nenhuma pessoa encontrada</td>
+        <td colspan="3">Nenhum usuário encontrado</td>
     </tr>
     <%
         }
