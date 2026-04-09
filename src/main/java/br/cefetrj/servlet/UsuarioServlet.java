@@ -22,10 +22,6 @@ public class UsuarioServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String id = request.getParameter("id");
-        if (id != null && !id.isEmpty()) {
-            doPut(request, response);
-            return;
-        }
         String email = request.getParameter("email");
         String senha = request.getParameter("senha");
         String[] perfis = request.getParameterValues("perfil");
@@ -34,7 +30,7 @@ public class UsuarioServlet extends HttpServlet {
         PerfilUsuarioDAO perfilUsuarioDAO = new PerfilUsuarioDAO();
         boolean erro = false;
         Set<String> erros = new HashSet<>();
-        Usuario usuarioErro = new Usuario(null, email, senha, false, null, null);
+        Usuario usuarioErro = new Usuario(id != null ? Long.valueOf(id) : null, email, senha, false, null, null);
         if (departamentoId == null || departamentoId.isEmpty()) {
             erro = true;
             erros.add("Departamento é obrigatório.");
@@ -51,6 +47,11 @@ public class UsuarioServlet extends HttpServlet {
                 String perfilId = perfis[i];
                 usuarioErro.getPerfis().add(perfilUsuarioDAO.buscarPorId(Long.valueOf(perfilId)));
             }
+        }
+        request.setAttribute("usuarioErro", usuarioErro);
+        if (id != null && !id.isEmpty()) {
+            doPut(request, response);
+            return;
         }
 
         if (!erro) {
@@ -77,7 +78,10 @@ public class UsuarioServlet extends HttpServlet {
         String email = request.getParameter("email");
         String senha = request.getParameter("senha");
 
-        Usuario p1 = new Usuario(Long.parseLong(id), email, senha, false);
+        Usuario usuarioErro = (Usuario) request.getAttribute("usuarioErro");
+
+        Usuario p1 = new Usuario(Long.parseLong(id), email, senha, false, usuarioErro.getPerfis(),
+                usuarioErro.getDepartamento());
         try {
             UsuarioDAO usuarioDAO = new UsuarioDAO();
             usuarioDAO.atualizar(p1);
@@ -111,7 +115,7 @@ public class UsuarioServlet extends HttpServlet {
         }
         try {
 
-            Usuario usuario = usuarioDAO.buscarPorId(Integer.valueOf(id));
+            Usuario usuario = usuarioDAO.buscarPorId(Long.valueOf(id));
             request.setAttribute("usuario", usuario);
         } catch (Exception e) {
             System.out.println("Erro ao cadastrar pessoa: " + e.getMessage());
