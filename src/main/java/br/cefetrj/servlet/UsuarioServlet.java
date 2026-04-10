@@ -67,6 +67,7 @@ public class UsuarioServlet extends HttpServlet {
             request.getRequestDispatcher("/usuario/mostraDados.jsp").forward(request, response);
         } else {
             request.setAttribute("usuario", usuarioErro);
+            request.setAttribute("erros", erros);
             request.getRequestDispatcher("/usuario/form.jsp").forward(request, response);
         }
 
